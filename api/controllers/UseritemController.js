@@ -19,15 +19,8 @@ module.exports = {
 
     mine: function(req, res) {
 
-        if ( ! req.session.user_id) {
-            res.statusCode = 400;
-            return res.send({error: true, type: 'NotAuthorizedError', message: 'You are not authorized to access this page.'});
-        }
-
-        if (req.method != 'POST') {
-            res.statusCode = 400;
-            return res.send({error: true, type: 'BadRequestError', message: 'Invalid request method, must use POST.'});
-        }
+        if (req.method !== 'GET') return MethodNotAllowedException.fire(req, res, ['GET']);
+        if (!req.session.user_id) return UnauthorizedException.fire(req, res);
 
         var query    = ['SELECT',
                         'u.id as id, i.id as item_id, i.name, i.price,',

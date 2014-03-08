@@ -19,15 +19,8 @@ module.exports = {
 
     login: function(req, res) {
 
-        if (req.method != 'POST') {
-            res.statusCode = 400;
-            return res.send({error: true, type: 'BadRequestError', message: 'Invalid request method, must use POST.'});
-        }
-
-        if ( ! req.param('user_id')) {
-            res.statusCode = 400;
-            return res.send({error: true, type: 'MissingParameterError', message: 'You did not specify an user.'});
-        }
+        if (req.method !== 'POST')  return MethodNotAllowedException.fire(req, res, ['POST']);
+        if (!req.param('user_id'))  return MissingMandatoryParametersException.fire(req, res, ['user_id']);
 
         req.session.user_id = req.param('user_id');
         res.send({user_id: req.param('user_id')});
