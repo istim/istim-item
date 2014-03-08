@@ -16,15 +16,37 @@
  */
 
 module.exports = {
-    
-  
 
+    mine: function(req, res) {
 
-  /**
-   * Overrides for the settings in `config/controllers.js`
-   * (specific to UseritemController)
-   */
-  _config: {}
+        if ( ! req.session.user_id) {
+            res.statusCode = 400;
+            return res.send({error: true, type: 'NotAuthorizedError', message: 'You are not authorized to access this page.'});
+        }
 
-  
+        if (req.method != 'POST') {
+            res.statusCode = 400;
+            return res.send({error: true, type: 'BadRequestError', message: 'Invalid request method, must use POST.'});
+        }
+
+        var query    = ['SELECT',
+                        'u.id as id, i.id as item_id, i.name, i.price,',
+                        'i.image, u.createdAt, u.updatedAt',
+                        'FROM Item i',
+                        'JOIN UserItem u',
+                        'ON u.item_id = i.id',
+                        'WHERE u.user_id = ' + req.session.user_id,
+                        'ORDER BY u.createdAt ASC'].join(' ');
+
+        var callBack = function(err, items) {
+            if (err)
+                return res.send(err);
+            else
+                return res.send(items);
+        };
+
+        return Item.query(query, callBack);
+
+    }
+
 };
