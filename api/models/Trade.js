@@ -10,12 +10,12 @@ module.exports = {
 
   attributes: {
 
-    item_id_from: {
+    useritem_id_from: {
         type: 'integer',
         required: true
     },
 
-    item_id_to: {
+    useritem_id_to: {
         type: 'integer',
         required: true
     },

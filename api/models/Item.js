@@ -15,6 +15,11 @@ module.exports = {
         required: true
     },
 
+    description: {
+        type: 'text',
+        required: true
+    },
+
     price: {
         type: 'float',
         required: true
