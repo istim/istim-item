@@ -17,6 +17,60 @@
 
 module.exports = {
 
+    buy: function(req, res) {
+
+        if (req.method !== 'POST')  return MethodNotAllowedException.fire(req, res, ['POST']);
+        if (!req.session.user_id)   return UnauthorizedException.fire(req, res);
+        if (!req.param('sale_id'))  return MissingMandatoryParametersException.fire(req, res, ['sale_id']);
+
+        // verify if sale exists and has not been sold
+        Sale.findOne(req.param('sale_id'), function(err, sale) {
+
+            if (err)
+                return res.send(err);
+            if (!sale)
+                return InGameGenericError.fire(req, res, 'We could not found this item for sale.');
+            if (sale.sold_at)
+                return InGameGenericError.fire(req, res, 'This item has already been sold.');
+
+            // verify if user owns the item
+            UserItem.findOne(sale.useritem_id, function(err, useritem) {
+
+                if (err)
+                    return res.send(err);
+                if (useritem.user_id == req.session.user_id)
+                    return InGameGenericError.fire(req, res, 'You can not buy your own item.');
+
+                var jsdate = new Date();
+                var dbdate = jsdate.getFullYear() + '-' +
+                            (jsdate.getMonth() < 9 ? '0' : '') + (jsdate.getMonth()+1) + '-' +
+                            (jsdate.getDate() < 10 ? '0' : '') + jsdate.getDate() + ' ' + jsdate.getHours() + ':' +
+                            jsdate.getMinutes() + ':' + jsdate.getSeconds();
+
+                // update item sold_at timestamp
+                Sale.update({id:sale.id}, {sold_at:dbdate}, function(err, sales) {
+
+                    if (err)
+                        return res.send(err);
+                    sale.sold_at = dbdate;
+
+                    // change item owner
+                    UserItem.update({id:useritem.id}, {user_id:req.session.user_id}, function(err, useritem) {
+
+                        if (err)
+                            return res.send(err);
+                        res.send(sale);
+
+                    });
+
+                });
+
+            });
+
+        });
+
+    },
+
     sell: function(req, res) {
 
         if (req.method !== 'POST')      return MethodNotAllowedException.fire(req, res, ['POST']);
