@@ -16,15 +16,56 @@
  */
 
 module.exports = {
-    
-  
+
+    sell: function(req, res) {
+
+        if (req.method !== 'POST')      return MethodNotAllowedException.fire(req, res, ['POST']);
+        if (!req.session.user_id)       return UnauthorizedException.fire(req, res);
+        if (!req.param('useritem_id'))  return MissingMandatoryParametersException.fire(req, res, ['useritem_id']);
 
 
-  /**
-   * Overrides for the settings in `config/controllers.js`
-   * (specific to SaleController)
-   */
-  _config: {}
+        // verify if user has item
+        UserItem.findOne(req.param('useritem_id'), function(err, item) {
 
-  
+            if (err)
+                return res.send(err);
+            if (!item)
+                return InGameGenericError.fire(req, res, 'You can\'t sell an item you don\'t have.');
+
+            // verify if item is already listed for sale
+            Sale.findOne({useritem_id: req.param('useritem_id'), sold_at: null}, function(err, sale) {
+
+                if (err)
+                    return res.send(err);
+                if (sale)
+                    return InGameGenericError.fire(req, res, 'You already list this item for sale.');
+
+                // create the sale
+                Sale.create({
+                    useritem_id: req.param('useritem_id'),
+                    sold_at: null
+                }).done(function(err, sale) {
+
+                    if (err)
+                        return res.send(err);
+                    return res.send(sale);
+
+                });
+
+            });
+
+
+        });
+
+
+    },
+
+
+    /**
+     * Overrides for the settings in `config/controllers.js`
+     * (specific to SaleController)
+     */
+    _config: {}
+
+
 };
