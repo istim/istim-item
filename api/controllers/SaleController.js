@@ -111,6 +111,42 @@ module.exports = {
 
         });
 
+    },
+
+    cancel: function(req, res) {
+
+        if (req.method !== 'POST')  return MethodNotAllowedException.fire(req, res, ['POST']);
+        if (!req.session.user_id)   return UnauthorizedException.fire(req, res);
+        if (!req.param('sale_id'))  return MissingMandatoryParametersException.fire(req, res, ['sale_id']);
+
+        // verify if sale exists
+        Sale.findOne(req.param('sale_id'), function(err, sale) {
+
+            if (err)
+                return res.send(err);
+            if (!sale)
+                return InGameGenericError.fire(req, res, 'We could not found this item for sale.');
+
+            // verify if user owns the item
+            UserItem.findOne(sale.useritem_id, function(err, useritem) {
+
+                if (err)
+                    return res.send(err);
+                if (useritem.user_id != req.session.user_id)
+                    return InGameGenericError.fire(req, res, 'You can\'t cancel a sale that doesn\'t belong to you.');
+
+                // remove sale
+                Sale.destroy({id:sale.id}).done(function(err) {
+
+                    if (err)
+                        return res.send(err);
+                    return res.send(sale);
+
+                });
+
+            });
+
+        });
 
     },
 
