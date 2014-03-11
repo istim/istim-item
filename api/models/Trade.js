@@ -10,14 +10,18 @@ module.exports = {
 
   attributes: {
 
-    useritem_id_from: {
+    useritem_id: {
         type: 'integer',
         required: true
     },
 
-    useritem_id_to: {
+    item_id: {
         type: 'integer',
         required: true
+    },
+
+    user_id: {
+        type: 'integer'
     },
 
     accepted: {

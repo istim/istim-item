@@ -17,6 +17,62 @@
 
 module.exports = {
 
+    for_sale: function(req, res) {
+
+        if (req.method !== 'GET')  return MethodNotAllowedException.fire(req, res, ['GET']);
+        if (!req.session.user_id)   return UnauthorizedException.fire(req, res);
+
+        var query    = ['SELECT',
+                        's.id, u.user_id, i.name, i.description,',
+                        'i.price, i.image, s.createdAt, s.updatedAt',
+                        'FROM Sale s',
+                        'JOIN UserItem u',
+                        'ON s.useritem_id = u.id',
+                        'JOIN Item i',
+                        'ON u.item_id = i.id',
+                        'WHERE u.user_id != ' + req.session.user_id,
+                        'AND s.sold_at IS NULL',
+                        'ORDER BY s.createdAt ASC'].join(' ');
+
+        var callBack = function(err, items) {
+            if (err)
+                return res.send(err);
+            else
+                return res.send(items);
+        };
+
+        return Item.query(query, callBack);
+
+    },
+
+    selling: function(req, res) {
+
+        if (req.method !== 'GET')  return MethodNotAllowedException.fire(req, res, ['GET']);
+        if (!req.session.user_id)   return UnauthorizedException.fire(req, res);
+
+        var query    = ['SELECT',
+                        's.id, u.user_id, i.name, i.description,',
+                        'i.price, i.image, s.createdAt, s.updatedAt',
+                        'FROM Sale s',
+                        'JOIN UserItem u',
+                        'ON s.useritem_id = u.id',
+                        'JOIN Item i',
+                        'ON u.item_id = i.id',
+                        'WHERE u.user_id = ' + req.session.user_id,
+                        'AND s.sold_at IS NULL',
+                        'ORDER BY s.createdAt ASC'].join(' ');
+
+        var callBack = function(err, items) {
+            if (err)
+                return res.send(err);
+            else
+                return res.send(items);
+        };
+
+        return Item.query(query, callBack);
+
+    },
+
     buy: function(req, res) {
 
         if (req.method !== 'POST')  return MethodNotAllowedException.fire(req, res, ['POST']);
