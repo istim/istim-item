@@ -19,6 +19,7 @@ module.exports = {
 
     mine: function(req, res) {
 
+        AuthHelper(req);
         if (req.method !== 'GET') return MethodNotAllowedException.fire(req, res, ['GET']);
         if (!req.session.user_id) return UnauthorizedException.fire(req, res);
 

@@ -19,6 +19,7 @@ module.exports = {
 
     for_sale: function(req, res) {
 
+        AuthHelper(req);
         if (req.method !== 'GET')  return MethodNotAllowedException.fire(req, res, ['GET']);
         if (!req.session.user_id)   return UnauthorizedException.fire(req, res);
 
@@ -47,6 +48,7 @@ module.exports = {
 
     selling: function(req, res) {
 
+        AuthHelper(req);
         if (req.method !== 'GET')  return MethodNotAllowedException.fire(req, res, ['GET']);
         if (!req.session.user_id)   return UnauthorizedException.fire(req, res);
 
@@ -75,6 +77,7 @@ module.exports = {
 
     buy: function(req, res) {
 
+        AuthHelper(req);
         if (req.method !== 'POST')  return MethodNotAllowedException.fire(req, res, ['POST']);
         if (!req.session.user_id)   return UnauthorizedException.fire(req, res);
         if (!req.param('sale_id'))  return MissingMandatoryParametersException.fire(req, res, ['sale_id']);
@@ -129,6 +132,7 @@ module.exports = {
 
     sell: function(req, res) {
 
+        AuthHelper(req);
         if (req.method !== 'POST')      return MethodNotAllowedException.fire(req, res, ['POST']);
         if (!req.session.user_id)       return UnauthorizedException.fire(req, res);
         if (!req.param('useritem_id'))  return MissingMandatoryParametersException.fire(req, res, ['useritem_id']);
@@ -171,12 +175,13 @@ module.exports = {
 
     cancel: function(req, res) {
 
+        AuthHelper(req);
         if (req.method !== 'POST')  return MethodNotAllowedException.fire(req, res, ['POST']);
         if (!req.session.user_id)   return UnauthorizedException.fire(req, res);
         if (!req.param('sale_id'))  return MissingMandatoryParametersException.fire(req, res, ['sale_id']);
 
         // verify if sale exists
-        Sale.findOne(req.param('sale_id'), function(err, sale) {
+        Sale.findOne({id:req.param('sale_id'), sold_at:null}, function(err, sale) {
 
             if (err)
                 return res.send(err);
