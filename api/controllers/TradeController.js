@@ -16,7 +16,7 @@
  */
 
 module.exports = {
-    
+
     list: function(req, res) {
 
         AuthHelper(req);
@@ -24,7 +24,7 @@ module.exports = {
         if (!req.session.user_id)   return UnauthorizedException.fire(req, res);
 
         var query    = ['SELECT',
-                        't.trade_id, u.user_id, t.item_id, i.name, i.description, i.image',
+                        't.id, u.user_id, t.item_id, i.name, i.description, i.image',
                         'FROM Trade t',
                         'JOIN UserItem u',
                         'ON t.item_id = u.item_id',
@@ -32,7 +32,7 @@ module.exports = {
                         'ON u.item_id = i.id',
                         'WHERE u.user_id != ' + req.session.user_id,
                         'AND t.alive = true',
-                        'ORDER BY s.createdAt ASC'].join(' ');
+                        'ORDER BY t.createdAt ASC'].join(' ');
 
         var callBack = function(err, items) {
             if (err)
@@ -54,7 +54,7 @@ module.exports = {
 
         // verify if the item exists and already on trade
         UserItem.findOne(req.param('item_id'), function(err, userItem) {
-          
+
             if (err)
                 return res.send(err);
             if (!userItem)
@@ -158,7 +158,7 @@ module.exports = {
                   return res.send(err);
               if (userItemOffered.user_id == req.session.user_id)
                   return InGameGenericError.fire(req, res, 'You can\'t to trade your own item with yourself.');
-              
+
               var jsdate = new Date();
               var dbdate = jsdate.getFullYear() + '-' +
                           (jsdate.getMonth() < 9 ? '0' : '') + (jsdate.getMonth()+1) + '-' +
@@ -342,5 +342,5 @@ module.exports = {
    */
   _config: {}
 
-  
+
 };
