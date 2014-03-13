@@ -1,3 +1,3 @@
-mysql -e < tests/tables.sql
-mysql -e < tests/rows.sql
+mysql < tests/tables.sql
+mysql < tests/rows.sql
 mocha tests/test.js --reporter spec --colors --recursive
