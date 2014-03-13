@@ -1,0 +1,676 @@
+{
+    "id": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447",
+    "name": "Steam - Item Management",
+    "description": "",
+    "order": [],
+    "folders": [
+        {
+            "id": "eccdbb82-5c48-2390-834b-9655add0b5ba",
+            "name": "App Specific",
+            "description": "",
+            "order": [
+                "afbd4656-b196-f772-91b5-ad93b253c6d8",
+                "71902f01-360b-9446-a797-8a8e1088222a",
+                "64084500-40e4-e5a1-bb18-cc1edd88e171",
+                "a60d9856-c0e2-ee1b-eb02-dc25ee8b2d0c",
+                "e2b26608-203d-3e90-ad8d-eede4481fe7b",
+                "e3c4c065-28c6-92ab-0b29-c26e30cab8c0",
+                "fc7ea15a-5f80-dc7d-50fd-1857708c7fd5",
+                "84627405-7dce-ed67-a81a-2a0b2a0abf83"
+            ],
+            "collection_name": "Steam - Item Management",
+            "collection_id": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447"
+        },
+        {
+            "id": "bfeed723-6ec6-1f02-6ca5-f62a0a348e57",
+            "name": "Item",
+            "description": "",
+            "order": [
+                "a7ff613a-1bd1-9c4d-9bee-42c244fc1a19",
+                "41040474-ee15-0a32-fd54-4bab5f6d7866",
+                "03416433-1d3b-8c4b-fd91-720e6001c72e",
+                "55325d7b-a05c-60ec-5a22-afe81809cb75"
+            ],
+            "collection_name": "Steam - Item Management",
+            "collection_id": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447"
+        },
+        {
+            "id": "0fc5a490-4ef5-0bb7-475b-49bffe444853",
+            "name": "Sale",
+            "description": "",
+            "order": [
+                "099bdc1c-2d49-a508-cca8-51ab97db5dc0",
+                "fa9ed7a7-4d27-48e8-0d6b-d6df473cdda5",
+                "d261db8d-8615-de2c-880e-ad408b2ff61d",
+                "72cb108a-aa4c-9f68-6de3-c47501f8bdbf"
+            ],
+            "collection_name": "Steam - Item Management",
+            "collection_id": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447"
+        },
+        {
+            "id": "60f777ca-8493-2219-ff70-e2f11b89ad30",
+            "name": "Trade",
+            "description": "",
+            "order": [
+                "f6dd0506-d61b-9ea1-fdb3-f20d98a9fa86",
+                "4156e170-8da7-3c22-5e61-ba85a9b5b496",
+                "36278821-ca9a-a04e-980b-d5dd7e212d22",
+                "ab0d7782-85f3-4765-359e-36c6b9f9959e"
+            ],
+            "collection_name": "Steam - Item Management",
+            "collection_id": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447"
+        },
+        {
+            "id": "d25c666b-b632-0380-064d-bf27408860d4",
+            "name": "UserItem",
+            "description": "",
+            "order": [
+                "8e52c611-eb1f-e6f8-8d86-0a2c3622f3b8",
+                "6fcf0a63-83b0-b895-682c-e023bf4e5d0c",
+                "004f2f32-c008-0830-9fbb-652333cc507f",
+                "c790a401-a305-559f-b7b3-57b2cbaa69dd"
+            ],
+            "collection_name": "Steam - Item Management",
+            "collection_id": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447"
+        }
+    ],
+    "timestamp": 1394133374254,
+    "synced": false,
+    "requests": [
+        {
+            "id": "004f2f32-c008-0830-9fbb-652333cc507f",
+            "headers": "",
+            "url": "http://localhost:1337/useritem/:id/",
+            "pathVariables": {
+                "id": ""
+            },
+            "method": "PUT",
+            "data": [
+                {
+                    "key": "user_id",
+                    "value": "",
+                    "type": "text"
+                },
+                {
+                    "key": "item_id",
+                    "value": "",
+                    "type": "text"
+                }
+            ],
+            "dataMode": "params",
+            "name": "Update User Item",
+            "description": "",
+            "descriptionFormat": "html",
+            "time": 1394238691054,
+            "version": 2,
+            "responses": [],
+            "tests": "",
+            "collectionId": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447",
+            "synced": false
+        },
+        {
+            "id": "03416433-1d3b-8c4b-fd91-720e6001c72e",
+            "headers": "",
+            "url": "http://localhost:1337/item/:id/",
+            "pathVariables": {
+                "id": ""
+            },
+            "method": "PUT",
+            "data": [
+                {
+                    "key": "name",
+                    "value": "",
+                    "type": "text"
+                },
+                {
+                    "key": "description",
+                    "value": "",
+                    "type": "text"
+                },
+                {
+                    "key": "price",
+                    "value": "",
+                    "type": "text"
+                },
+                {
+                    "key": "image",
+                    "value": "",
+                    "type": "text"
+                }
+            ],
+            "dataMode": "params",
+            "version": 2,
+            "tests": "",
+            "time": 1394313793614,
+            "name": "Update Item",
+            "description": "",
+            "collectionId": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447",
+            "responses": [],
+            "synced": false
+        },
+        {
+            "id": "099bdc1c-2d49-a508-cca8-51ab97db5dc0",
+            "headers": "",
+            "url": "http://localhost:1337/sale/",
+            "pathVariables": {},
+            "method": "GET",
+            "data": [],
+            "dataMode": "params",
+            "name": "List Sales",
+            "description": "",
+            "descriptionFormat": "html",
+            "time": 1394238942838,
+            "version": 2,
+            "responses": [],
+            "tests": "",
+            "collectionId": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447",
+            "synced": false
+        },
+        {
+            "id": "36278821-ca9a-a04e-980b-d5dd7e212d22",
+            "headers": "",
+            "url": "http://localhost:1337/trade/:id/",
+            "pathVariables": {
+                "id": ""
+            },
+            "method": "PUT",
+            "data": [
+                {
+                    "key": "useritem_id_from",
+                    "value": "",
+                    "type": "text"
+                },
+                {
+                    "key": "useritem_id_to",
+                    "value": "",
+                    "type": "text"
+                },
+                {
+                    "key": "accepted",
+                    "value": "",
+                    "type": "text"
+                }
+            ],
+            "dataMode": "params",
+            "version": 2,
+            "tests": "",
+            "time": 1394313830717,
+            "name": "Update Trade",
+            "description": "",
+            "collectionId": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447",
+            "responses": [],
+            "synced": false
+        },
+        {
+            "id": "41040474-ee15-0a32-fd54-4bab5f6d7866",
+            "headers": "",
+            "url": "http://localhost:1337/item/",
+            "pathVariables": {},
+            "method": "POST",
+            "data": [
+                {
+                    "key": "name",
+                    "value": "",
+                    "type": "text"
+                },
+                {
+                    "key": "description",
+                    "value": "",
+                    "type": "text"
+                },
+                {
+                    "key": "price",
+                    "value": "",
+                    "type": "text"
+                },
+                {
+                    "key": "image",
+                    "value": "",
+                    "type": "text"
+                }
+            ],
+            "dataMode": "params",
+            "version": 2,
+            "tests": "",
+            "time": 1394313782813,
+            "name": "Create Item",
+            "description": "",
+            "collectionId": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447",
+            "responses": [],
+            "synced": false
+        },
+        {
+            "id": "4156e170-8da7-3c22-5e61-ba85a9b5b496",
+            "headers": "",
+            "url": "http://localhost:1337/trade/",
+            "pathVariables": {},
+            "method": "POST",
+            "data": [
+                {
+                    "key": "useritem_id_from",
+                    "value": "",
+                    "type": "text"
+                },
+                {
+                    "key": "useritem_id_to",
+                    "value": "",
+                    "type": "text"
+                },
+                {
+                    "key": "accepted",
+                    "value": "",
+                    "type": "text"
+                }
+            ],
+            "dataMode": "params",
+            "version": 2,
+            "tests": "",
+            "time": 1394313823543,
+            "name": "Create Trade",
+            "description": "",
+            "collectionId": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447",
+            "responses": [],
+            "synced": false
+        },
+        {
+            "id": "55325d7b-a05c-60ec-5a22-afe81809cb75",
+            "headers": "",
+            "url": "http://localhost:1337/item/:id/",
+            "pathVariables": {
+                "id": ""
+            },
+            "method": "DELETE",
+            "data": [],
+            "dataMode": "params",
+            "name": "Delete Item",
+            "description": "",
+            "descriptionFormat": "html",
+            "time": 1394133513643,
+            "version": 2,
+            "responses": [],
+            "tests": "",
+            "collectionId": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447",
+            "synced": false
+        },
+        {
+            "id": "64084500-40e4-e5a1-bb18-cc1edd88e171",
+            "headers": "",
+            "url": "http://localhost:1337/useritem/mine/",
+            "pathVariables": {},
+            "method": "GET",
+            "data": [],
+            "dataMode": "params",
+            "version": 2,
+            "tests": "",
+            "time": 1394305044054,
+            "name": "Show User Items",
+            "description": "",
+            "collectionId": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447",
+            "responses": [],
+            "synced": false
+        },
+        {
+            "id": "6fcf0a63-83b0-b895-682c-e023bf4e5d0c",
+            "headers": "",
+            "url": "http://localhost:1337/useritem/",
+            "pathVariables": {},
+            "method": "POST",
+            "data": [
+                {
+                    "key": "user_id",
+                    "value": "",
+                    "type": "text"
+                },
+                {
+                    "key": "item_id",
+                    "value": "",
+                    "type": "text"
+                }
+            ],
+            "dataMode": "params",
+            "name": "Create User Item",
+            "description": "",
+            "descriptionFormat": "html",
+            "time": 1394137300407,
+            "version": 2,
+            "responses": [],
+            "tests": "",
+            "collectionId": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447",
+            "synced": false
+        },
+        {
+            "id": "71902f01-360b-9446-a797-8a8e1088222a",
+            "headers": "",
+            "url": "http://localhost:1337/user/logout/",
+            "pathVariables": {},
+            "method": "GET",
+            "data": [],
+            "dataMode": "params",
+            "name": "Pretend to Logout",
+            "description": "",
+            "descriptionFormat": "html",
+            "time": 1394250222032,
+            "version": 2,
+            "responses": [],
+            "tests": "",
+            "collectionId": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447",
+            "synced": false
+        },
+        {
+            "id": "72cb108a-aa4c-9f68-6de3-c47501f8bdbf",
+            "headers": "",
+            "url": "http://localhost:1337/sale/:id/",
+            "pathVariables": {
+                "id": ""
+            },
+            "method": "DELETE",
+            "data": [],
+            "dataMode": "params",
+            "name": "Delete Sale",
+            "description": "",
+            "descriptionFormat": "html",
+            "time": 1394239061388,
+            "version": 2,
+            "responses": [],
+            "tests": "",
+            "collectionId": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447",
+            "synced": false
+        },
+        {
+            "id": "84627405-7dce-ed67-a81a-2a0b2a0abf83",
+            "headers": "",
+            "url": "http://localhost:1337/sale/selling/",
+            "pathVariables": {},
+            "method": "GET",
+            "data": [
+                {
+                    "key": "user_id",
+                    "value": "2",
+                    "type": "text"
+                }
+            ],
+            "dataMode": "params",
+            "name": "Items You Are Selling",
+            "description": "",
+            "descriptionFormat": "html",
+            "time": 1394496980553,
+            "version": 2,
+            "responses": [],
+            "tests": "",
+            "collectionId": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447",
+            "synced": false
+        },
+        {
+            "id": "8e52c611-eb1f-e6f8-8d86-0a2c3622f3b8",
+            "headers": "",
+            "url": "http://localhost:1337/useritem/",
+            "pathVariables": {},
+            "method": "GET",
+            "data": [],
+            "dataMode": "params",
+            "name": "List Users Items",
+            "description": "",
+            "descriptionFormat": "html",
+            "time": 1394137262017,
+            "version": 2,
+            "responses": [],
+            "tests": "",
+            "collectionId": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447",
+            "synced": false
+        },
+        {
+            "id": "a60d9856-c0e2-ee1b-eb02-dc25ee8b2d0c",
+            "headers": "",
+            "url": "http://localhost:1337/sale/sell/",
+            "pathVariables": {},
+            "method": "POST",
+            "data": [
+                {
+                    "key": "useritem_id",
+                    "value": "",
+                    "type": "text"
+                }
+            ],
+            "dataMode": "params",
+            "name": "Sell Item",
+            "description": "",
+            "descriptionFormat": "html",
+            "time": 1394304916886,
+            "version": 2,
+            "responses": [],
+            "tests": "",
+            "collectionId": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447",
+            "synced": false
+        },
+        {
+            "id": "a7ff613a-1bd1-9c4d-9bee-42c244fc1a19",
+            "headers": "",
+            "url": "http://localhost:1337/item/",
+            "pathVariables": {},
+            "method": "GET",
+            "data": [],
+            "dataMode": "params",
+            "name": "List Items",
+            "description": "",
+            "descriptionFormat": "html",
+            "time": 1394133436263,
+            "version": 2,
+            "responses": [],
+            "tests": null,
+            "collectionId": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447",
+            "synced": false
+        },
+        {
+            "id": "ab0d7782-85f3-4765-359e-36c6b9f9959e",
+            "headers": "",
+            "url": "http://localhost:1337/trade/:id/",
+            "pathVariables": {
+                "id": ""
+            },
+            "method": "DELETE",
+            "data": [],
+            "dataMode": "params",
+            "name": "Delete Trade",
+            "description": "",
+            "descriptionFormat": "html",
+            "time": 1394239286333,
+            "version": 2,
+            "responses": [],
+            "tests": "",
+            "collectionId": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447",
+            "synced": false
+        },
+        {
+            "id": "afbd4656-b196-f772-91b5-ad93b253c6d8",
+            "headers": "",
+            "url": "http://localhost:1337/user/login/",
+            "pathVariables": {},
+            "method": "POST",
+            "data": [
+                {
+                    "key": "user_id",
+                    "value": "",
+                    "type": "text"
+                }
+            ],
+            "dataMode": "params",
+            "name": "Pretend to Login",
+            "description": "",
+            "descriptionFormat": "html",
+            "time": 1394250207272,
+            "version": 2,
+            "responses": [],
+            "tests": "",
+            "collectionId": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447",
+            "synced": false
+        },
+        {
+            "id": "c790a401-a305-559f-b7b3-57b2cbaa69dd",
+            "headers": "",
+            "url": "http://localhost:1337/useritem/:id/",
+            "pathVariables": {
+                "id": ""
+            },
+            "method": "DELETE",
+            "data": [],
+            "dataMode": "params",
+            "name": "Delete User Item",
+            "description": "",
+            "descriptionFormat": "html",
+            "time": 1394238720947,
+            "version": 2,
+            "responses": [],
+            "tests": "",
+            "collectionId": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447",
+            "synced": false
+        },
+        {
+            "id": "d261db8d-8615-de2c-880e-ad408b2ff61d",
+            "headers": "",
+            "url": "http://localhost:1337/sale/:id/",
+            "pathVariables": {
+                "id": ""
+            },
+            "method": "PUT",
+            "data": [
+                {
+                    "key": "useritem_id",
+                    "value": "",
+                    "type": "text"
+                },
+                {
+                    "key": "sold_at",
+                    "value": "",
+                    "type": "text"
+                }
+            ],
+            "dataMode": "params",
+            "version": 2,
+            "tests": "",
+            "time": 1394313809250,
+            "name": "Update Sale",
+            "description": "",
+            "collectionId": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447",
+            "responses": [],
+            "synced": false
+        },
+        {
+            "id": "e2b26608-203d-3e90-ad8d-eede4481fe7b",
+            "headers": "",
+            "url": "http://localhost:1337/sale/buy/",
+            "pathVariables": {},
+            "method": "POST",
+            "data": [
+                {
+                    "key": "sale_id",
+                    "value": "",
+                    "type": "text"
+                }
+            ],
+            "dataMode": "params",
+            "name": "Buy Item",
+            "description": "",
+            "descriptionFormat": "html",
+            "time": 1394334749334,
+            "version": 2,
+            "responses": [],
+            "tests": "",
+            "collectionId": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447",
+            "synced": false
+        },
+        {
+            "id": "e3c4c065-28c6-92ab-0b29-c26e30cab8c0",
+            "headers": "",
+            "url": "http://localhost:1337/sale/cancel/",
+            "pathVariables": {},
+            "method": "POST",
+            "data": [
+                {
+                    "key": "sale_id",
+                    "value": "",
+                    "type": "text"
+                }
+            ],
+            "dataMode": "params",
+            "name": "Cancel Item",
+            "description": "",
+            "descriptionFormat": "html",
+            "time": 1394376690476,
+            "version": 2,
+            "responses": [],
+            "tests": "",
+            "collectionId": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447",
+            "synced": false
+        },
+        {
+            "id": "f6dd0506-d61b-9ea1-fdb3-f20d98a9fa86",
+            "headers": "",
+            "url": "http://localhost:1337/trade/",
+            "pathVariables": {},
+            "method": "GET",
+            "data": [],
+            "dataMode": "params",
+            "name": "List Trades",
+            "description": "",
+            "descriptionFormat": "html",
+            "time": 1394239183671,
+            "version": 2,
+            "responses": [],
+            "tests": "",
+            "collectionId": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447",
+            "synced": false
+        },
+        {
+            "id": "fa9ed7a7-4d27-48e8-0d6b-d6df473cdda5",
+            "headers": "",
+            "url": "http://localhost:1337/sale/",
+            "pathVariables": {},
+            "method": "POST",
+            "data": [
+                {
+                    "key": "useritem_id",
+                    "value": "",
+                    "type": "text"
+                },
+                {
+                    "key": "sold_at",
+                    "value": "",
+                    "type": "text"
+                }
+            ],
+            "dataMode": "params",
+            "version": 2,
+            "tests": "",
+            "time": 1394313805014,
+            "name": "Create Sale",
+            "description": "",
+            "collectionId": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447",
+            "responses": [],
+            "synced": false
+        },
+        {
+            "id": "fc7ea15a-5f80-dc7d-50fd-1857708c7fd5",
+            "headers": "",
+            "url": "http://localhost:1337/sale/for_sale/",
+            "pathVariables": {},
+            "method": "GET",
+            "data": [
+                {
+                    "key": "sale_id",
+                    "value": "",
+                    "type": "text"
+                }
+            ],
+            "dataMode": "params",
+            "name": "Items For Sale",
+            "description": "",
+            "descriptionFormat": "html",
+            "time": 1394495006587,
+            "version": 2,
+            "responses": [],
+            "tests": "",
+            "collectionId": "14f3675c-b3b3-d8a4-c43e-c9e5397c6447",
+            "synced": false
+        }
+    ]
+}
