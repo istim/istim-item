@@ -9,8 +9,14 @@
 module.exports = {
 
   attributes: {
-
+    /*
     useritem_id: {
+        type: 'integer',
+        required: true
+    },
+    */
+
+    user_id: {
         type: 'integer',
         required: true
     },
@@ -20,13 +26,18 @@ module.exports = {
         required: true
     },
 
-    user_id: {
+    trade_item_id: {
         type: 'integer'
     },
 
     accepted: {
         type: 'boolean',
         defaultsTo: false
+    },
+
+    alive: {
+        type: 'boolean',
+        defaultsTo: true
     },
 
   }
