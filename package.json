@@ -12,7 +12,8 @@
   },
   "scripts": {
     "start": "node app.js",
-    "debug": "node debug app.js"
+    "debug": "node debug app.js",
+    "test": "./run_test.sh"
   },
   "main": "app.js",
   "repository": "",

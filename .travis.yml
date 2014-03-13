@@ -1,0 +1,11 @@
+before_script:
+  - npm install assert
+  - npm install optimist
+  - npm install sails
+  - npm install sails-mysql
+  - npm install should
+  - npm install supertest
+  - npm install -g mocha
+language: node_js
+node_js:
+  - "0.10"
