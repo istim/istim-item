@@ -206,12 +206,110 @@ describe('SaleController', function() {
                 done();
             });
         });
-        // it('deve retornar uma lista vazio para quem não está vendendo nada', function(done) {
-        //     request(app.express.app).get('/sale/buy?login=2').end(function(err, res) {
-        //         res.text.should.be.equal('[]');
-        //         done();
-        //     });
-        // });
+        it('deve retornar erro caso o usuário tente comprar o próprio item', function(done) {
+            request(app.express.app).post('/sale/buy?login=1').send({sale_id:1}).end(function(err, res) {
+                assert.ok(res.body.error);
+                assert.equal('InGameGenericError', res.body.type);
+                res.body.message.should.containEql('your own item');
+                done();
+            });
+        });
+        it('deve retornar o objeto compra caso tudo ocorra corretamente', function (done) {
+           request(app.express.app).post('/sale/buy?login=3').send({sale_id:3}).end(function(err, res) {
+                res.body.should.have.keys('id', 'useritem_id', 'sold_at', 'createdAt', 'updatedAt');
+                done();
+            });
+        });
+    });
+    describe('#sell()', function() {
+        it('deve retornar erro caso seja feita uma requisição GET', function (done) {
+            request(app.express.app).get('/sale/sell').expect(405).end(function(err, res) {
+                assert.ok(res.body.error);
+                assert.equal('MethodNotAllowedException', res.body.type);
+                done();
+            });
+        });
+        it('deve retornar erro caso o usuário não esteja logado', function(done) {
+            request(app.express.app).post('/sale/sell').end(function(err, res) {
+                assert.ok(res.body.error);
+                assert.equal('UnauthorizedException', res.body.type);
+                done();
+            });
+        });
+        it('deve retornar erro caso o usuário não especifique qual o item', function(done) {
+            request(app.express.app).post('/sale/sell?login=1').end(function(err, res) {
+                assert.ok(res.body.error);
+                assert.equal('MissingMandatoryParametersException', res.body.type);
+                done();
+            });
+        });
+        it('deve retornar erro caso o usuário tente vender algo que não tem', function (done) {
+            request(app.express.app).post('/sale/sell?login=1').send({useritem_id:213}).end(function(err, res) {
+                assert.ok(res.body.error);
+                assert.equal('InGameGenericError', res.body.type);
+                res.body.message.should.containEql('item you don\'t have');
+                done();
+            });
+        });
+        it('deve retornar erro caso o usuário tente vender um item de novo', function (done) {
+            request(app.express.app).post('/sale/sell?login=1').send({useritem_id:2}).end(function(err, res) {
+                assert.ok(res.body.error);
+                assert.equal('InGameGenericError', res.body.type);
+                res.body.message.should.containEql('already listed');
+                done();
+            });
+        });
+        it('deve retornar o objeto venda se tudo ocorrer normalmente', function (done) {
+            request(app.express.app).post('/sale/sell?login=1').send({useritem_id:5}).end(function(err, res) {
+                res.body.should.have.keys('id', 'useritem_id', 'sold_at', 'createdAt', 'updatedAt');
+                done();
+            });
+        });
+    });
+    describe('#cancel()', function() {
+        it('deve retornar erro caso seja feita uma requisição GET', function (done) {
+            request(app.express.app).get('/sale/cancel').expect(405).end(function(err, res) {
+                assert.ok(res.body.error);
+                assert.equal('MethodNotAllowedException', res.body.type);
+                done();
+            });
+        });
+        it('deve retornar erro caso o usuário não esteja logado', function(done) {
+            request(app.express.app).post('/sale/cancel').end(function(err, res) {
+                assert.ok(res.body.error);
+                assert.equal('UnauthorizedException', res.body.type);
+                done();
+            });
+        });
+        it('deve retornar erro caso o usuário não especifique qual o item', function(done) {
+            request(app.express.app).post('/sale/cancel?login=1').end(function(err, res) {
+                assert.ok(res.body.error);
+                assert.equal('MissingMandatoryParametersException', res.body.type);
+                done();
+            });
+        });
+        it('deve retornar erro caso a venda não exista', function (done) {
+            request(app.express.app).post('/sale/cancel?login=1').send({sale_id:213}).end(function(err, res) {
+                assert.ok(res.body.error);
+                assert.equal('InGameGenericError', res.body.type);
+                res.body.message.should.containEql('not found');
+                done();
+            });
+        });
+        it('deve retornar erro caso o usuário tente cancelar a venda de outro', function (done) {
+            request(app.express.app).post('/sale/cancel?login=2').send({sale_id:2}).end(function(err, res) {
+                assert.ok(res.body.error);
+                assert.equal('InGameGenericError', res.body.type);
+                res.body.message.should.containEql('doesn\'t belong to you');
+                done();
+            });
+        });
+        it('deve retornar o objeto venda se tudo ocorrer normalmente', function (done) {
+            request(app.express.app).post('/sale/cancel?login=1').send({sale_id:5}).end(function(err, res) {
+                res.body.should.have.keys('id', 'useritem_id', 'sold_at', 'createdAt', 'updatedAt');
+                done();
+            });
+        });
     });
 });
 

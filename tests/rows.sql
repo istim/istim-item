@@ -1,3 +1,5 @@
+USE `istim-item`;
+
 LOCK TABLES `item` WRITE;
 INSERT INTO `item` (`name`, `description`, `price`, `image`, `id`, `createdAt`, `updatedAt`)
 VALUES
@@ -112,3 +114,18 @@ VALUES
     (5,26,49,'2014-03-08 22:59:47','2014-03-08 22:59:47'),
     (5,22,50,'2014-03-08 22:59:48','2014-03-08 22:59:48'),
     (5,26,51,'2014-03-08 22:59:48','2014-03-08 22:59:48');
+UNLOCK TABLES;
+
+
+LOCK TABLES `sale` WRITE;
+/*!40000 ALTER TABLE `sale` DISABLE KEYS */;
+
+INSERT INTO `sale` (`useritem_id`, `sold_at`, `id`, `createdAt`, `updatedAt`)
+VALUES
+    (1,NULL,1,'2014-03-13 13:49:54','2014-03-13 13:49:54'),
+    (2,NULL,2,'2014-03-13 13:50:00','2014-03-13 13:50:00'),
+    (3,NULL,3,'2014-03-13 13:50:04','2014-03-13 13:50:04'),
+    (4,'2014-03-13',4,'2014-03-13 13:50:10','2014-03-13 13:50:10');
+
+/*!40000 ALTER TABLE `sale` ENABLE KEYS */;
+UNLOCK TABLES;
