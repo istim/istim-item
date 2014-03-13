@@ -152,7 +152,7 @@ module.exports = {
                 if (err)
                     return res.send(err);
                 if (sale)
-                    return InGameGenericError.fire(req, res, 'You already list this item for sale.');
+                    return InGameGenericError.fire(req, res, 'You already listed this item for sale.');
 
                 // create the sale
                 Sale.create({
