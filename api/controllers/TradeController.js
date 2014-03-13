@@ -2,7 +2,7 @@
  * TradeController
  *
  * @module      :: Controller
- * @description	:: A set of functions called `actions`.
+ * @description :: A set of functions called `actions`.
  *
  *                 Actions contain code telling Sails how to respond to a certain type of request.
  *                 (i.e. do stuff, then send some JSON, show an HTML page, or redirect to another URL)
@@ -97,35 +97,35 @@ module.exports = {
       // verify if the trade exists
       Trade.findOne({item_id:req.param('item_id'), alive:true}, function(err, trade) {
 
+        if (err)
+            return res.send(err);
+        if (!trade)
+            return InGameGenericError.fire(req, res, 'We could not found this item for trade.');
+
+        // verify if user owns the item
+        UserItem.findOne(trade.user_id, function(err, userItem) {
+
           if (err)
               return res.send(err);
-          if (!trade)
-              return InGameGenericError.fire(req, res, 'We could not found this item for trade.');
+          if (userItem.user_id != req.session.user_id)
+              return InGameGenericError.fire(req, res, 'You can\'t cancel a trade that doesn\'t belong to you.');
 
-          // verify if user owns the item
-          UserItem.findOne(trade.user_id, function(err, userItem) {
+          // remove trade
+          Trade.destroy({id:trade.id}).done(function(err) {
 
-            if (err)
-                return res.send(err);
-            if (userItem.user_id != req.session.user_id)
-                return InGameGenericError.fire(req, res, 'You can\'t cancel a trade that doesn\'t belong to you.');
-
-            // remove trade
-            Trade.destroy({id:trade.id}).done(function(err) {
-
-                if (err)
-                    return res.send(err);
-                return res.send(trade);
-
-            });
+              if (err)
+                  return res.send(err);
+              return res.send(trade);
 
           });
 
         });
 
-      },
+      });
 
-      accept: function(req, res) {
+    },
+
+    accept: function(req, res) {
 
         AuthHelper(req);
         if (req.method !== 'POST')  return MethodNotAllowedException.fire(req, res, ['POST']);
@@ -224,12 +224,51 @@ module.exports = {
           if (userItem.user_id != req.session.user_id)
               return InGameGenericError.fire(req, res, 'You can\'t cancel the trade that doesn\'t belong to you.');
 
-          // remove trade
-          Trade.destroy({id:trade.id}).done(function(err) {
+          // remove the offer
+          Trade.update({id:trade.id}, {trade_item_id:null}, function(err, tradeitem) {
 
-              if (err)
-                  return res.send(err);
-              return res.send(trade);
+            if (err)
+                return res.send(err);
+            res.send(tradeitem);
+
+          });
+
+        });
+
+      });
+
+    },
+
+    offer_trade: function(req, res) {
+
+      AuthHelper(req);
+      if (req.method !== 'POST')  return MethodNotAllowedException.fire(req, res, ['POST']);
+      if (!req.session.user_id)   return UnauthorizedException.fire(req, res);
+      if (!req.param('item_id'))  return MissingMandatoryParametersException.fire(req, res, ['item_id']);
+      if (!req.param('trade_item_id'))  return MissingMandatoryParametersException.fire(req, res, ['trade_item_id']);
+
+      // verify if the trade exists
+      Trade.findOne({item_id:req.param('item_id'), trade_item_id:null, alive:true}, function(err, trade) {
+
+        if (err)
+            return res.send(err);
+        if (!trade)
+            return InGameGenericError.fire(req, res, 'This trade has offer or doesn\'t exists.');
+
+        // verify if user owns the item
+        UserItem.findOne({item_id:req.param('trade_item_id')}, function(err, userItem) {
+
+          if (err)
+              return res.send(err);
+          if (userItem.user_id != req.session.user_id)
+              return InGameGenericError.fire(req, res, 'You can\'t to trade a item that you aren\'t the owner.');
+
+          // do the offer
+          Trade.update({id:trade.id}, {trade_item_id:req.param('trade_item_id')}, function(err, tradeItem) {
+
+            if (err)
+                return res.send(err);
+            res.send(tradeItem);
 
           });
 
@@ -252,8 +291,38 @@ module.exports = {
                         'ON t.item_id = u.item_id',
                         'JOIN Item i',
                         'ON u.item_id = i.id',
-                        'WHERE t.user_id == ' + req.session.user_id,
+                        'WHERE t.user_id = ' + req.session.user_id,
                         'AND t.alive = false',
+                        'ORDER BY s.createdAt ASC'].join(' ');
+
+        var callBack = function(err, items) {
+            if (err)
+                return res.send(err);
+            else
+                return res.send(items);
+        };
+
+        return Item.query(query, callBack);
+
+    },
+
+    list_offer: function(req, res) {
+
+        AuthHelper(req);
+        if (req.method !== 'GET')  return MethodNotAllowedException.fire(req, res, ['GET']);
+        if (!req.session.user_id)   return UnauthorizedException.fire(req, res);
+
+        var query    = ['SELECT',
+                        't.trade_id, t.item_id, i.name, i.description, i.image, t.trade_item_id, i_offered.name name_item_offered, i_offered.description description_item_offered, i_offered.image image_item_offered', ,
+                        'FROM Trade t',
+                        'JOIN UserItem u',
+                        'ON t.item_id = u.item_id',
+                        'JOIN Item i',
+                        'ON u.item_id = i.id',
+                        'JOIN Item i_offered',
+                        'ON t.trade_item_id = i_offered.id',
+                        'WHERE t.user_id = ' + req.session.user_id,
+                        'AND t.alive = true',
                         'ORDER BY s.createdAt ASC'].join(' ');
 
         var callBack = function(err, items) {
