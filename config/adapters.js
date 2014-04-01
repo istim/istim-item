@@ -29,11 +29,11 @@ module.exports.adapters = {
   mysql: {
 
     module: 'sails-mysql',
-    host: 'localhost',
-    user: 'root',
+    host: '107.170.40.134',
+    user: 'istim',
     // Psst.. You can put your password in config/local.js instead
     // so you don't inadvertently push it up if you're using version control
-    password: '',
-    database: 'istim-item'
+    password: 'zue9yApNEDfvE3MY',
+    database: 'istim_items'
   }
 };

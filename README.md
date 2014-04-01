@@ -1,4 +1,4 @@
-# istim-items
+# istim-item
 
 Gerenciamento de itens dos [usuários](https://github.com/istim/istim-user) da plataforma.
 

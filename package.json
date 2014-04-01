@@ -1,7 +1,7 @@
 {
   "name": "istim-item",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.9",
   "description": "a Sails application",
   "dependencies": {
     "sails": "0.9.11",
