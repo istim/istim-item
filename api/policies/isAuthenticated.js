@@ -13,14 +13,8 @@ module.exports = function(req, res, next) {
     var userId = false;
     var authenticated = false;
 
-    console.log('------------------------------------');
-    console.log(userId);
-    if (req.session.user_id) userId = req.session.user_id;
     if (req.param.user_id) userId = req.param.user_id;
-    console.log(req.session.user_id);
-    console.log(req.param.user_id);
-    console.log(userId);
-    console.log('------------------------------------');
+    if (req.session.user_id) userId = req.session.user_id;
 
     if (userId) {
 
