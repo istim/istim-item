@@ -1,5 +1,4 @@
 {
-  "name": "Istim Item Manager",
   "private": true,
   "version": "0.0.0",
   "description": "Manage items for istim platform",
@@ -27,5 +26,6 @@
   "subdomain": "istimitem",
   "engines": {
     "node": "0.10.x"
-  }
+  },
+  "name": "istimitemmanager"
 }
