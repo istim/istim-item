@@ -4,7 +4,7 @@ Gerenciamento de itens dos [usuários](https://github.com/istim/istim-user) da p
 
 ## Server URL
 
-Não foi feito o deploy da API.
+http://istimitem.nodejitsu.com/
 
 ## Services
 
@@ -47,6 +47,10 @@ Parâmetros em *itálico* representam parâmetros opcionais.
 
 - **istim-users:** autenticação dos usuários
 - **istim-virtualCoin:** validação do dinheiro do jogador para efetuar as transações
+
+## Todo
+[ ] Desenvolver os testes para a controladora TradeController
+[ ] Criar uma nova documentação da API no [Apiary.io](http://apiary.io/)
 
 ## Notas Importantes
 
