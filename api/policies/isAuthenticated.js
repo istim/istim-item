@@ -13,7 +13,7 @@ module.exports = function(req, res, next) {
     var userId = false;
     var authenticated = false;
 
-    if (req.param.user_id) userId = req.param.user_id;
+    if (req.query.user_id) userId = req.query.user_id;
     if (req.session.user_id) userId = req.session.user_id;
 
     if (userId) {

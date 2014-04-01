@@ -44,7 +44,7 @@ CREATE TABLE `trade` (
   `updatedAt` datetime DEFAULT NULL,
   `useritem_id` int(11) DEFAULT NULL,
   `item_id` int(11) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `user_id` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -52,7 +52,7 @@ CREATE TABLE `trade` (
 
 DROP TABLE IF EXISTS `useritem`;
 CREATE TABLE `useritem` (
-  `user_id` int(11) DEFAULT NULL,
+  `user_id` varchar(255) DEFAULT NULL,
   `item_id` int(11) DEFAULT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `createdAt` datetime DEFAULT NULL,

@@ -49,6 +49,7 @@ Parâmetros em *itálico* representam parâmetros opcionais.
 - **istim-virtualCoin:** validação do dinheiro do jogador para efetuar as transações
 
 ## Todo
+[ ] Executar os testes de forma sequencial
 [ ] Desenvolver os testes para a controladora TradeController
 [ ] Criar uma nova documentação da API no [Apiary.io](http://apiary.io/)
 

@@ -29,7 +29,7 @@ module.exports = {
                         'ON s.useritem_id = u.id',
                         'JOIN Item i',
                         'ON u.item_id = i.id',
-                        'WHERE u.user_id != ' + req.session.user_id,
+                        'WHERE u.user_id != \'' + req.session.user_id + '\'',
                         'AND s.sold_at IS NULL',
                         'ORDER BY s.createdAt ASC'].join(' ');
 
@@ -56,7 +56,7 @@ module.exports = {
                         'ON s.useritem_id = u.id',
                         'JOIN Item i',
                         'ON u.item_id = i.id',
-                        'WHERE u.user_id = ' + req.session.user_id,
+                        'WHERE u.user_id != \'' + req.session.user_id + '\'',
                         'AND s.sold_at IS NULL',
                         'ORDER BY s.createdAt ASC'].join(' ');
 
@@ -77,8 +77,7 @@ module.exports = {
         if (!req.param('sale_id'))  return MissingMandatoryParametersException.fire(req, res, ['sale_id']);
 
         // verify if sale exists and has not been sold
-        Sale.findOne(req.param('sale_id'), function(err, sale) {
-
+        Sale.findOne({id:req.param('sale_id')}, function(err, sale) {
             if (err)
                 return res.send(err);
             if (!sale)
