@@ -1,19 +1,19 @@
 {
-  "name": "istim-item",
+  "name": "Istim Item Manager",
   "private": true,
-  "version": "0.9",
-  "description": "a Sails application",
+  "version": "0.0.0",
+  "description": "Manage items for istim platform",
   "dependencies": {
     "sails": "0.9.11",
     "grunt": "0.4.1",
     "sails-disk": "~0.9.0",
     "ejs": "0.8.4",
     "optimist": "0.3.4",
-    "assert": "*",
-    "sails-mysql": "*",
-    "should": "*",
-    "supertest": "*",
-    "restler": "*"
+    "assert": "1.1.1",
+    "sails-mysql": "0.9.9",
+    "should": "3.1.3",
+    "supertest": "0.9.0",
+    "restler": "3.2.0"
   },
   "scripts": {
     "start": "node app.js",
@@ -24,7 +24,7 @@
   "repository": "",
   "author": "",
   "license": "",
-  "subdomain": "istim-item",
+  "subdomain": "istimitem",
   "engines": {
     "node": "0.10.x"
   }
