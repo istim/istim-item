@@ -19,9 +19,7 @@ module.exports = {
 
     list: function(req, res) {
 
-        AuthHelper(req);
         if (req.method !== 'GET')  return MethodNotAllowedException.fire(req, res, ['GET']);
-        if (!req.session.user_id)   return UnauthorizedException.fire(req, res);
 
         var query    = ['SELECT',
                         't.id, u.user_id, t.item_id, i.name, i.description, i.image',
@@ -47,9 +45,7 @@ module.exports = {
 
     trade: function(req, res) {
 
-        AuthHelper(req);
         if (req.method !== 'POST')  return MethodNotAllowedException.fire(req, res, ['POST']);
-        if (!req.session.user_id)   return UnauthorizedException.fire(req, res);
         if (!req.param('item_id'))  return MissingMandatoryParametersException.fire(req, res, ['item_id']);
 
         // verify if the item exists and already on trade
@@ -89,9 +85,7 @@ module.exports = {
 
     cancel: function(req, res) {
 
-      AuthHelper(req);
       if (req.method !== 'POST')  return MethodNotAllowedException.fire(req, res, ['POST']);
-      if (!req.session.user_id)   return UnauthorizedException.fire(req, res);
       if (!req.param('item_id'))  return MissingMandatoryParametersException.fire(req, res, ['item_id']);
 
       // verify if the trade exists
@@ -127,9 +121,7 @@ module.exports = {
 
     accept: function(req, res) {
 
-        AuthHelper(req);
         if (req.method !== 'POST')  return MethodNotAllowedException.fire(req, res, ['POST']);
-        if (!req.session.user_id)   return UnauthorizedException.fire(req, res);
         if (!req.param('item_id'))  return MissingMandatoryParametersException.fire(req, res, ['item_id']);
         if (!req.param('trade_item_id'))  return MissingMandatoryParametersException.fire(req, res, ['trade_item_id']);
 
@@ -202,9 +194,7 @@ module.exports = {
 
     reject: function(req, res) {
 
-      AuthHelper(req);
       if (req.method !== 'POST')  return MethodNotAllowedException.fire(req, res, ['POST']);
-      if (!req.session.user_id)   return UnauthorizedException.fire(req, res);
       if (!req.param('item_id'))  return MissingMandatoryParametersException.fire(req, res, ['item_id']);
       if (!req.param('trade_item_id'))  return MissingMandatoryParametersException.fire(req, res, ['trade_item_id']);
 
@@ -241,9 +231,7 @@ module.exports = {
 
     offer_trade: function(req, res) {
 
-      AuthHelper(req);
       if (req.method !== 'POST')  return MethodNotAllowedException.fire(req, res, ['POST']);
-      if (!req.session.user_id)   return UnauthorizedException.fire(req, res);
       if (!req.param('item_id'))  return MissingMandatoryParametersException.fire(req, res, ['item_id']);
       if (!req.param('trade_item_id'))  return MissingMandatoryParametersException.fire(req, res, ['trade_item_id']);
 
@@ -280,9 +268,7 @@ module.exports = {
 
     history: function(req, res) {
 
-        AuthHelper(req);
         if (req.method !== 'GET')  return MethodNotAllowedException.fire(req, res, ['GET']);
-        if (!req.session.user_id)   return UnauthorizedException.fire(req, res);
 
         var query    = ['SELECT',
                         't.trade_id, u.user_id, t.item_id, i.name, i.description, i.image',
@@ -308,9 +294,7 @@ module.exports = {
 
     list_offer: function(req, res) {
 
-        AuthHelper(req);
         if (req.method !== 'GET')  return MethodNotAllowedException.fire(req, res, ['GET']);
-        if (!req.session.user_id)   return UnauthorizedException.fire(req, res);
 
         var query    = ['SELECT',
                         't.trade_id, t.item_id, i.name, i.description, i.image, t.trade_item_id, i_offered.name name_item_offered, i_offered.description description_item_offered, i_offered.image image_item_offered', ,

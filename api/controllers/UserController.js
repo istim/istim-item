@@ -20,10 +20,30 @@ module.exports = {
     login: function(req, res) {
 
         if (req.method !== 'POST')  return MethodNotAllowedException.fire(req, res, ['POST']);
-        if (!req.param('user_id'))  return MissingMandatoryParametersException.fire(req, res, ['user_id']);
+        if (!req.param('email'))  return MissingMandatoryParametersException.fire(req, res, ['email']);
+        if (!req.param('password'))  return MissingMandatoryParametersException.fire(req, res, ['password']);
 
-        req.session.user_id = req.param('user_id');
-        res.send({user_id: req.param('user_id')});
+        var rest = require('restler');
+        var options = {
+            data: {
+                email: req.param('email'),
+                password: req.param('password')
+            }
+        };
+
+        rest.post(
+            'http://istim-user.nodejitsu.com/auth/login',
+            options
+        ).on('complete', function(data, response) {
+            if (data.error) {
+                res.send({error: true, message: data.error});
+            }
+            else {
+                req.session.user = data;
+                req.session.user_id = data.id;
+                res.send({success: true, user: data})
+            }
+        });
 
     },
 

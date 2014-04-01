@@ -9,13 +9,40 @@
  */
 module.exports = function(req, res, next) {
 
-  // User is allowed, proceed to the next policy, 
-  // or if this is the last policy, the controller
-  if (req.session.authenticated) {
-    return next();
-  }
+    var rest = require('restler');
+    var userId = false;
+    var authenticated = false;
 
-  // User is not allowed
-  // (default res.forbidden() behavior can be overridden in `config/403.js`)
-  return res.forbidden('You are not permitted to perform this action.');
+    console.log('------------------------------------');
+    console.log(userId);
+    if (req.session.user_id) userId = req.session.user_id;
+    if (req.param.user_id) userId = req.param.user_id;
+    console.log(req.session.user_id);
+    console.log(req.param.user_id);
+    console.log(userId);
+    console.log('------------------------------------');
+
+    if (userId) {
+
+        var options = {
+            data: {
+                userId: userId
+            }
+        };
+
+        rest.post(
+            'http://istim-user.jit.su/authenticated',
+            options
+        ).on('complete', function(data, response) {
+            if (data.authenticated == 'no') {
+                return UnauthorizedException.fire(req, res);
+            } else {
+                return next();
+            }
+        });
+
+    } else {
+        return UnauthorizedException.fire(req, res);
+    }
+
 };

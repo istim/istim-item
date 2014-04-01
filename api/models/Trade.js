@@ -17,7 +17,7 @@ module.exports = {
     */
 
     user_id: {
-        type: 'integer',
+        type: 'string',
         required: true
     },
 

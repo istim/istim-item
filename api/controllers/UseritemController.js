@@ -19,9 +19,7 @@ module.exports = {
 
     mine: function(req, res) {
 
-        AuthHelper(req);
         if (req.method !== 'GET') return MethodNotAllowedException.fire(req, res, ['GET']);
-        if (!req.session.user_id) return UnauthorizedException.fire(req, res);
 
         var query    = ['SELECT',
                         'u.id as id, i.id as item_id, i.name, i.price,',
@@ -29,7 +27,7 @@ module.exports = {
                         'FROM Item i',
                         'JOIN UserItem u',
                         'ON u.item_id = i.id',
-                        'WHERE u.user_id = ' + req.session.user_id,
+                        'WHERE u.user_id = \'' + req.session.user_id + '\'',
                         'ORDER BY u.createdAt ASC'].join(' ');
 
         var callBack = function(err, items) {
