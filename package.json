@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "Manage items for istim platform",
   "dependencies": {
     "sails": "0.9.11",
@@ -27,5 +27,5 @@
   "engines": {
     "node": "0.10.x"
   },
-  "name": "istimitemmanager"
+  "name": "MDiakASDmiASD_lucasfercunha"
 }
