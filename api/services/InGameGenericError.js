@@ -15,7 +15,7 @@ module.exports = {
             message: message
         };
 
-        res.statusCode = typeof code !== 'undefined' ? code : 409;
+        res.statusCode = typeof code !== 'undefined' ? code : 200;
         return res.send(error);
     }
 
